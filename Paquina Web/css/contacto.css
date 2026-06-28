@@ -1,0 +1,219 @@
+/* =============================================
+   CONTACTO
+============================================= */
+#contacto {
+  padding: 150px 72px 100px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.contacto-header {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.contacto-header .label { margin-bottom: 18px; }
+
+.contacto-title {
+  font-family: var(--serif);
+  font-size: clamp(56px, 7.5vw, 88px);
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1;
+}
+
+.contacto-sub {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-mid);
+  max-width: 500px;
+  margin: 26px auto 0;
+}
+
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 0.88fr 1fr;
+  gap: 84px;
+  align-items: start;
+}
+
+.info-block {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-block:first-child { padding-top: 0; }
+.info-block:last-child  { border-bottom: none; }
+
+.info-label {
+  font-family: var(--sans);
+  font-size: 9.5px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 12px;
+}
+
+.info-value {
+  font-family: var(--serif);
+  font-size: 21px;
+  color: var(--text);
+  line-height: 1.72;
+}
+
+.social-row {
+  display: flex;
+  gap: 28px;
+  margin-top: 16px;
+}
+
+.social-row span {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.social-row span:hover {
+  color: var(--terracotta);
+  border-bottom-color: var(--terracotta);
+}
+
+/* Form */
+.form-wrap {
+  background: var(--cream-light);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 54px;
+}
+
+.form-title {
+  font-family: var(--serif);
+  font-size: 34px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.form-sub {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-light);
+  margin-bottom: 38px;
+}
+
+.form-group { margin-bottom: 30px; }
+
+.form-row {
+  display: flex;
+  gap: 26px;
+}
+
+.form-row .form-group { flex: 1; }
+
+.f-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+.f-field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #D8CBB4;
+  padding: 8px 0;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.35s var(--ease);
+}
+
+.f-field::placeholder {
+  color: #C4B49A;
+  font-style: italic;
+}
+
+.f-field:focus { border-bottom-color: var(--terracotta); }
+
+textarea.f-field {
+  resize: none;
+  min-height: 70px;
+  display: block;
+}
+
+/* Map */
+.map-section {
+  padding: 0 72px 150px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.map-box {
+  position: relative;
+  height: 420px;
+  background: var(--cream-mid);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-pin {
+  width: 52px;
+  height: 52px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--terracotta);
+  transform: rotate(-45deg);
+  box-shadow: 0 10px 24px rgba(120,60,40,0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-pin::after {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--cream-light);
+  transform: rotate(45deg);
+}
+
+.map-card {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  background: rgba(36,27,18,0.90);
+  backdrop-filter: blur(8px);
+  padding: 18px 26px;
+  border-radius: 3px;
+}
+
+.map-card p {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: #F4EDE0;
+  line-height: 1.5;
+}
+
+.map-card small {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}

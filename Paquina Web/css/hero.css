@@ -1,0 +1,123 @@
+/* =============================================
+   HERO
+============================================= */
+#hero {
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#hero-bg {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  animation: kenburns 26s ease-in-out infinite alternate;
+  transform-origin: 58% 42%;
+}
+
+#hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes kenburns {
+  0%   { transform: scale(1.04) translate(0%, 0%);      }
+  100% { transform: scale(1.14) translate(-1.6%, -1.2%); }
+}
+
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(36,27,18,0.58) 0%,
+    rgba(36,27,18,0.16) 36%,
+    rgba(36,27,18,0.52) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 140px 24px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 9px;
+  text-transform: uppercase;
+  color: rgba(232,217,194,0.88);
+  margin-bottom: 26px;
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(88px, 14vw, 168px);
+  font-weight: 500;
+  color: #F6EFE2;
+  line-height: 0.88;
+  letter-spacing: 4px;
+}
+
+.hero-divider {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin: 20px 0 52px;
+}
+
+.hero-rule {
+  width: 66px;
+  height: 1px;
+  background: rgba(232,221,200,0.42);
+}
+
+.hero-cafe {
+  font-family: var(--sans);
+  font-size: 15px;
+  letter-spacing: 20px;
+  color: #EBDDC6;
+  font-weight: 200;
+  padding-left: 20px;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+.scroll-cue-text {
+  font-family: var(--sans);
+  font-size: 8px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(232,217,194,0.65);
+}
+
+.scroll-cue-line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, rgba(232,217,194,0.75), transparent);
+  animation: cuePulse 2.6s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes cuePulse {
+  0%, 100% { opacity: 0.28; transform: scaleY(0.55); }
+  50%       { opacity: 1;    transform: scaleY(1) translateY(6px); }
+}

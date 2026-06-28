@@ -1,0 +1,86 @@
+/* =============================================
+   FAVORITOS — 3 RANDOM ITEMS
+============================================= */
+#favoritos {
+  padding: 150px 72px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.favoritos-header {
+  text-align: center;
+  margin-bottom: 84px;
+}
+
+.favoritos-header .label { margin-bottom: 16px; }
+
+.favoritos-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4.2vw, 52px);
+  font-weight: 500;
+  color: var(--text);
+}
+
+#fav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 52px;
+}
+
+.fav-card { display: flex; flex-direction: column; }
+
+.fav-img-wrap {
+  position: relative;
+  height: 360px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--cream-mid);
+}
+
+.fav-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease);
+}
+
+.fav-img-wrap:hover img { transform: scale(1.07); }
+
+.fav-num {
+  font-family: var(--sans);
+  font-size: 9.5px;
+  letter-spacing: 3.5px;
+  color: var(--terracotta);
+  margin-top: 24px;
+  text-transform: uppercase;
+}
+
+.fav-name {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--text);
+  margin-top: 7px;
+  line-height: 1.2;
+}
+
+.fav-desc {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-light);
+  margin-top: 9px;
+  letter-spacing: 0.2px;
+  line-height: 1.65;
+}
+
+.fav-price {
+  font-family: var(--serif);
+  font-size: 24px;
+  color: var(--terracotta);
+  margin-top: 14px;
+}
+
+.favoritos-cta {
+  text-align: center;
+  margin-top: 76px;
+}

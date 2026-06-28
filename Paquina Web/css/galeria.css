@@ -1,0 +1,93 @@
+/* =============================================
+   GALERÍA — CSS Columns masonry
+   Muestra todas las imágenes completas, sin corte
+============================================= */
+#galeria {
+  background: var(--espresso);
+  padding: 150px 72px;
+}
+
+.gal-wrap { max-width: 1480px; margin: 0 auto; }
+
+.gal-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.gal-header .label {
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+
+.gal-header .label::before { color: var(--gold); }
+
+.gal-title {
+  font-family: var(--serif);
+  font-size: clamp(56px, 7.5vw, 88px);
+  font-weight: 500;
+  color: #F4EDE0;
+  line-height: 1;
+}
+
+.gal-sub {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: #A99A82;
+  max-width: 500px;
+  margin: 26px auto 0;
+}
+
+/* Masonry con CSS columns — cada imagen a su altura natural */
+.gal-grid {
+  columns: 4;
+  column-gap: 10px;
+}
+
+.gal-item {
+  break-inside: avoid;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  background: var(--espresso-mid);
+  display: inline-block;
+  width: 100%;
+}
+
+/* Imagen completa — sin recorte */
+.gal-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: bottom;
+  transition: transform 0.85s var(--ease);
+}
+
+.gal-item:hover img { transform: scale(1.04); }
+
+.gal-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(36,27,18,0.88) 0%,
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px 18px;
+}
+
+.gal-item:hover .gal-overlay { opacity: 1; }
+
+.gal-caption {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #F4EDE0;
+}

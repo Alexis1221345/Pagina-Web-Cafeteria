@@ -1,0 +1,58 @@
+/* =============================================
+   MANIFESTO BAND
+============================================= */
+#manifesto {
+  background: var(--espresso);
+  padding: 130px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#manifesto::before {
+  content: '"';
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif);
+  font-size: 360px;
+  color: rgba(201,168,118,0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.manifesto-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 36px;
+}
+
+.manifesto-rule {
+  width: 44px;
+  height: 1px;
+  background: rgba(232,221,200,0.32);
+  display: block;
+}
+
+.manifesto-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.manifesto-quote {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.52;
+  color: #F4EDE0;
+  max-width: 940px;
+  margin: 0 auto;
+  letter-spacing: 0.2px;
+}

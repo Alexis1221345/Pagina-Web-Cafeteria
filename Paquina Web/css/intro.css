@@ -1,0 +1,98 @@
+/* =============================================
+   VIDEO INTRO OVERLAY
+============================================= */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: var(--espresso);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.4s var(--ease), visibility 1.4s;
+}
+
+#intro.closing {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#intro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#intro-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(36,27,18,0.38) 0%,
+    rgba(36,27,18,0.12) 50%,
+    rgba(36,27,18,0.55) 100%
+  );
+  z-index: 1;
+}
+
+/* Contenedor logo + botón, visible desde el primer frame */
+#intro-brand {
+  position: absolute;
+  bottom: 28px;
+  right: 44px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.intro-logo-img {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(201,168,118,0.65);
+  /* doble anillo para resaltar el logo sobre el video */
+  box-shadow:
+    0 0 0 5px rgba(36,27,18,0.55),
+    0 0 0 7px rgba(201,168,118,0.22),
+    0 8px 40px rgba(0,0,0,0.65);
+  display: block;
+}
+
+/* Botón Saltar — centrado debajo del logo */
+#intro-skip {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: rgba(244,237,224,0.6);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.4s var(--ease);
+  padding: 4px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#intro-skip::before,
+#intro-skip::after {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+  display: inline-block;
+  transition: width 0.4s var(--ease);
+}
+
+#intro-skip:hover {
+  color: rgba(244,237,224,0.95);
+}
+
+#intro-skip:hover::before,
+#intro-skip:hover::after { width: 24px; }

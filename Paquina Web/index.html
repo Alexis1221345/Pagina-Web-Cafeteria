@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muna Café — Café de Especialidad · Ciudad de México</title>
+  <meta name="description" content="Café de especialidad en el corazón de la Ciudad de México. Granos de origen, repostería artesanal y un espacio diseñado para la calma.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reveal.css">
+
+  <!-- Components -->
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/lightbox.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/labels.css">
+
+  <!-- Sections -->
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/filosofia.css">
+  <link rel="stylesheet" href="css/manifesto.css">
+  <link rel="stylesheet" href="css/favoritos.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/nosotros.css">
+  <link rel="stylesheet" href="css/galeria.css">
+  <link rel="stylesheet" href="css/contacto.css">
+  <link rel="stylesheet" href="css/footer.css">
+
+  <!-- Responsive -->
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- =============================================
+     VIDEO INTRO — siempre presente en el shell
+============================================= -->
+<div id="intro">
+  <video id="intro-video" autoplay muted playsinline preload="auto">
+    <source src="../Imagenes/Video de Inicio.mp4" type="video/mp4">
+  </video>
+  <div id="intro-veil"></div>
+  <div id="intro-brand">
+    <img class="intro-logo-img" src="../Imagenes/Logo.jpg" alt="Muna Café">
+    <button id="intro-skip" onclick="closeIntro()">Saltar</button>
+  </div>
+</div>
+
+<!-- =============================================
+     MOBILE MENU OVERLAY — siempre presente
+============================================= -->
+<div id="mobile-overlay">
+  <a href="#inicio"    class="mob-link" onclick="closeMob()">Inicio</a>
+  <a href="#menu"      class="mob-link" onclick="closeMob()">Menú</a>
+  <a href="#nosotros"  class="mob-link" onclick="closeMob()">Nosotros</a>
+  <a href="#galeria"   class="mob-link" onclick="closeMob()">Galería</a>
+  <a href="#contacto"  class="mob-link" onclick="closeMob()">Contacto</a>
+  <div class="mob-footer">Muna Café · CDMX 2025</div>
+</div>
+
+<!-- =============================================
+     LIGHTBOX — siempre presente
+============================================= -->
+<div id="lightbox" onclick="closeLB(event)">
+  <div id="lb-close" onclick="closeLB()">✕</div>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-caption"></div>
+</div>
+
+<!-- =============================================
+     NAVIGATION — siempre presente
+============================================= -->
+<nav id="nav">
+  <a href="#inicio" class="nav-brand">
+    <img class="nav-brand-logo" src="../Imagenes/Logo.jpg" alt="Muna Café Logo">
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">Muna</span>
+      <span class="nav-brand-sub">Café</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio"   class="active">Inicio</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto" class="nav-cta-link">Contacto</a></li>
+  </ul>
+  <button id="hamburger" onclick="toggleMob()" aria-label="Abrir menú">
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- =============================================
+     SECCIONES — cargadas dinámicamente
+     Cada data-include apunta a secciones/*.html
+============================================= -->
+<main id="app">
+  <div data-include="secciones/hero.html"></div>
+  <div data-include="secciones/filosofia.html"></div>
+  <div data-include="secciones/manifesto.html"></div>
+  <div data-include="secciones/favoritos.html"></div>
+  <div data-include="secciones/menu.html"></div>
+  <div data-include="secciones/nosotros.html"></div>
+  <div data-include="secciones/galeria.html"></div>
+  <div data-include="secciones/contacto.html"></div>
+  <div data-include="secciones/footer.html"></div>
+</main>
+
+<!-- =============================================
+     JAVASCRIPT
+     Orden importante:
+       1. loader.js  → inyecta secciones, dispara 'sectionsLoaded'
+       2. intro.js   → no depende del contenido
+       3. nav.js     → no depende del contenido
+       4. lightbox.js→ no depende del contenido
+       5. scroll.js  → escucha 'sectionsLoaded'
+       6. favoritos.js→ escucha 'sectionsLoaded' (después de scroll.js)
+============================================= -->
+<script src="js/loader.js"></script>
+<script src="js/intro.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/lightbox.js"></script>
+<script src="js/scroll.js"></script>
+<script src="js/favoritos.js"></script>
+
+</body>
+</html>

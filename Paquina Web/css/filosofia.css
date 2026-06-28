@@ -1,0 +1,53 @@
+/* =============================================
+   FILOSOFÍA
+============================================= */
+#filosofia {
+  padding: 150px 72px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.filosofia-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.filosofia-left .label { margin-bottom: 26px; }
+
+.filosofia-heading {
+  font-family: var(--serif);
+  font-size: clamp(36px, 3.8vw, 54px);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text);
+  letter-spacing: 0.3px;
+  margin-bottom: 32px;
+}
+
+.filosofia-body {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 2.05;
+  color: var(--text-mid);
+  max-width: 480px;
+}
+
+.filosofia-img-wrap {
+  position: relative;
+  height: 580px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--cream-mid);
+}
+
+.filosofia-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease);
+}
+
+.filosofia-img-wrap:hover img { transform: scale(1.05); }

@@ -1,0 +1,73 @@
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media (max-width: 1024px) {
+  #filosofia         { padding: 110px 48px; }
+  .filosofia-inner   { gap: 64px; }
+  #manifesto         { padding: 110px 48px; }
+  #favoritos         { padding: 110px 48px; }
+  #menu              { padding: 110px 48px; }
+  #nosotros          { padding: 110px 48px; }
+  #galeria           { padding: 110px 48px; }
+  .gal-grid          { columns: 3; }
+  #contacto          { padding: 110px 48px 80px; }
+  .map-section       { padding: 0 48px 110px; }
+  footer             { padding: 72px 48px 36px; }
+  .footer-cols       { gap: 52px; }
+}
+
+@media (max-width: 768px) {
+  #nav {
+    top: 14px;
+    width: calc(100% - 28px);
+    padding: 8px 8px 8px 18px;
+  }
+
+  .nav-links { display: none; }
+  #hamburger { display: flex; }
+
+  #hero .hero-content { padding: 120px 24px 100px; }
+
+  #filosofia         { padding: 88px 24px; }
+  .filosofia-inner   { grid-template-columns: 1fr; gap: 44px; }
+  .filosofia-img-wrap { height: 360px; }
+
+  #manifesto         { padding: 88px 24px; }
+
+  #favoritos         { padding: 88px 24px; }
+  #fav-grid          { grid-template-columns: 1fr; gap: 44px; }
+
+  #menu              { padding: 88px 24px; }
+  .menu-cat          { grid-template-columns: 1fr; gap: 36px; }
+  .menu-cat-left     { position: static; }
+  .menu-items        { grid-template-columns: 1fr; gap: 28px; }
+
+  #nosotros          { padding: 88px 24px; }
+  .nosotros-split    { grid-template-columns: 1fr; }
+  .nosotros-text     { padding: 48px 32px; }
+  .nosotros-photo    { height: 380px; }
+  .valores           { grid-template-columns: 1fr; gap: 44px; }
+
+  #galeria           { padding: 88px 24px; }
+  .gal-grid          { columns: 2; }
+
+  #contacto          { padding: 88px 24px 72px; }
+  .contacto-grid     { grid-template-columns: 1fr; gap: 52px; }
+  .map-section       { padding: 0 24px 88px; }
+
+  footer             { padding: 64px 24px 32px; }
+  .footer-nl         { flex-direction: column; gap: 32px; }
+  .footer-form       { min-width: unset; width: 100%; }
+  .footer-main       { flex-direction: column; gap: 48px; }
+  .footer-cols       { flex-wrap: wrap; gap: 40px; }
+  .footer-bottom     { flex-direction: column; gap: 10px; text-align: center; }
+
+  .form-row          { flex-direction: column; gap: 0; }
+}
+
+@media (max-width: 480px) {
+  .hero-name { font-size: 72px; }
+  .hero-cafe { letter-spacing: 12px; font-size: 13px; }
+  .gal-grid  { columns: 2; }
+  .nosotros-text { padding: 36px 24px; }
+}

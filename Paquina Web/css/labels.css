@@ -1,0 +1,23 @@
+/* =============================================
+   SECTION LABELS
+============================================= */
+.label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label::before { content: '—'; }
+
+.label-center {
+  justify-content: center;
+}
+
+.label-light {
+  color: var(--gold);
+}
