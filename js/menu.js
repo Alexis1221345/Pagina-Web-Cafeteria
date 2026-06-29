@@ -47,6 +47,9 @@
       var nombre  = cellVal(c[3]);
       if (!nombre) return;
 
+      // Skip header row if gviz includes it as a data row
+      if (nombre.toLowerCase() === 'nombre' || catName.toLowerCase() === 'categoria') return;
+
       var key = catNum || catName;
       if (!index[key]) {
         var group = { catNum: catNum, catName: catName, catFoto: catFoto, items: [] };
