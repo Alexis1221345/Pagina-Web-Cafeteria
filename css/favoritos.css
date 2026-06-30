@@ -24,15 +24,30 @@
 #fav-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 52px;
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.fav-card { display: flex; flex-direction: column; }
+/* ── Card ── */
+.fav-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  cursor: pointer;
+  transition: background 0.4s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
 
+.fav-card:hover { background: var(--cream-light); }
+
+/* ── Image ── */
 .fav-img-wrap {
   position: relative;
-  height: 360px;
-  border-radius: 3px;
+  height: 400px;
   overflow: hidden;
   background: var(--cream-mid);
 }
@@ -41,46 +56,84 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1s var(--ease);
+  transition: transform 1.1s var(--ease);
+  display: block;
 }
 
-.fav-img-wrap:hover img { transform: scale(1.07); }
+.fav-card:hover .fav-img-wrap img { transform: scale(1.06); }
+
+/* Price badge on image */
+.fav-img-wrap::after {
+  content: attr(data-price);
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-family: var(--serif);
+  font-size: 17px;
+  color: #F4EDE0;
+  background: rgba(36,27,18,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 5px 13px;
+  border-radius: 100px;
+  border: 1px solid rgba(201,168,118,0.2);
+  pointer-events: none;
+}
+
+/* ── Text area ── */
+.fav-body {
+  flex: 1;
+  padding: 28px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
 
 .fav-num {
   font-family: var(--sans);
-  font-size: 9.5px;
-  letter-spacing: 3.5px;
+  font-size: 9px;
+  letter-spacing: 4px;
   color: var(--terracotta);
-  margin-top: 24px;
   text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .fav-name {
   font-family: var(--serif);
-  font-size: 28px;
+  font-size: 30px;
+  font-weight: 500;
   color: var(--text);
-  margin-top: 7px;
-  line-height: 1.2;
+  line-height: 1.15;
 }
+
+.fav-divider {
+  width: 28px;
+  height: 1px;
+  background: var(--gold-soft);
+  margin: 16px 0;
+  transition: width 0.4s var(--ease);
+}
+
+.fav-card:hover .fav-divider { width: 56px; }
 
 .fav-desc {
   font-family: var(--sans);
   font-size: 13px;
   font-weight: 300;
   color: var(--text-light);
-  margin-top: 9px;
-  letter-spacing: 0.2px;
-  line-height: 1.65;
+  line-height: 1.75;
+  flex: 1;
 }
 
 .fav-price {
   font-family: var(--serif);
-  font-size: 24px;
+  font-size: 22px;
   color: var(--terracotta);
-  margin-top: 14px;
+  margin-top: 20px;
 }
 
+/* ── CTA ── */
 .favoritos-cta {
   text-align: center;
-  margin-top: 76px;
+  margin-top: 72px;
 }

@@ -24,6 +24,7 @@
   margin: 0 auto;
 }
 
+/* ── Split panel ── */
 .nosotros-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -31,14 +32,27 @@
   overflow: hidden;
   margin-bottom: 120px;
   min-height: 620px;
+  border: 1px solid var(--border);
 }
 
 .nosotros-text {
-  background: #FDFAF4;
+  background: var(--espresso-mid);
   padding: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+}
+
+/* gold accent line at the top of the text panel */
+.nosotros-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 80px;
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
 }
 
 .nosotros-p {
@@ -46,7 +60,7 @@
   font-size: 16px;
   font-weight: 300;
   line-height: 2.1;
-  color: var(--text-mid);
+  color: #C5B69D;
 }
 
 .nosotros-p + .nosotros-p { margin-top: 28px; }
@@ -54,10 +68,12 @@
 .nosotros-cita {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 28px;
-  color: var(--terracotta);
-  line-height: 1.48;
+  font-size: 26px;
+  color: var(--gold);
+  line-height: 1.5;
   margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(201,168,118,0.2);
 }
 
 .nosotros-photo {
@@ -74,24 +90,59 @@
 
 .nosotros-photo:hover img { transform: scale(1.05); }
 
+/* ── Valores ── */
 .valores {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 64px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
 }
+
+.valores > div {
+  padding: 52px 48px 56px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  transition: background 0.4s var(--ease);
+}
+
+.valores > div:last-child { border-right: none; }
+
+.valores > div:hover { background: var(--cream-light); }
+
+/* gold top bar reveals on hover */
+.valores > div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 48px;
+  width: 32px;
+  height: 2px;
+  background: var(--terracotta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+
+.valores > div:hover::before { transform: scaleX(1); }
 
 .valor-num {
   font-family: var(--serif);
-  font-size: 50px;
-  color: #C9B79A;
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--border);
   line-height: 1;
+  transition: color 0.4s var(--ease);
 }
+
+.valores > div:hover .valor-num { color: var(--gold-soft); }
 
 .valor-name {
   font-family: var(--serif);
-  font-size: 27px;
+  font-size: 26px;
   color: var(--text);
-  margin: 18px 0 12px;
+  margin: 16px 0 14px;
+  line-height: 1.2;
 }
 
 .valor-desc {

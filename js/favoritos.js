@@ -42,11 +42,15 @@ document.addEventListener('sectionsLoaded', function () {
 
     var imgWrap = document.createElement('div');
     imgWrap.className = 'fav-img-wrap';
+    imgWrap.setAttribute('data-price', item.price);
     var img = document.createElement('img');
     img.src     = item.img;
     img.alt     = item.name;
     img.loading = 'lazy';
     imgWrap.appendChild(img);
+
+    var body = document.createElement('div');
+    body.className = 'fav-body';
 
     var num   = document.createElement('div');
     num.className   = 'fav-num';
@@ -56,6 +60,9 @@ document.addEventListener('sectionsLoaded', function () {
     name.className   = 'fav-name';
     name.textContent = item.name;
 
+    var divider = document.createElement('div');
+    divider.className = 'fav-divider';
+
     var desc  = document.createElement('p');
     desc.className   = 'fav-desc';
     desc.textContent = item.desc;
@@ -64,7 +71,8 @@ document.addEventListener('sectionsLoaded', function () {
     price.className   = 'fav-price';
     price.textContent = item.price;
 
-    card.append(imgWrap, num, name, desc, price);
+    body.append(num, name, divider, desc, price);
+    card.append(imgWrap, body);
     return card;
   }
 
