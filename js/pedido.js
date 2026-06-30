@@ -52,9 +52,12 @@
     var groups = [], idx = {};
     rows.forEach(function (row) {
       var c = row.c || [];
-      if (cellVal(c[7]).toUpperCase() === 'FALSE') return;
-      var nombre = cellVal(c[3]);
+      var nombre  = cellVal(c[3]);
+      var catName = cellVal(c[1]);
       if (!nombre) return;
+      // Saltar fila de encabezado si gviz la incluye como dato
+      if (nombre.toLowerCase() === 'nombre' || catName.toLowerCase() === 'categoria') return;
+      if (cellVal(c[7]).toUpperCase() === 'FALSE') return;
       var catNum  = cellVal(c[0]);
       var catName = cellVal(c[1]);
       var key = catNum || catName;
