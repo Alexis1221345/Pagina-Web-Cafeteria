@@ -323,8 +323,10 @@
   }
 
   /* ── WhatsApp ────────────────────────────────────────────────── */
-  function buildWAUrl() {
-    var payload = JSON.stringify({
+  var SERVER_URL = 'https://agente-ia-5cnl.onrender.com';
+
+  function cartPayload() {
+    return JSON.stringify({
       items: cart.map(function (i) {
         return {
           nombre:   i.nombre,
@@ -336,7 +338,10 @@
         };
       }),
     });
-    return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent('PEDIDO_WEB:' + payload);
+  }
+
+  function openWhatsApp(text) {
+    window.open('https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text), '_blank');
   }
 
   /* ── Inicialización ──────────────────────────────────────────── */
@@ -390,7 +395,30 @@
     $$('whatsapp-btn').addEventListener('click', function (e) {
       e.stopPropagation();
       if (!cart.length) return;
-      window.open(buildWAUrl(), '_blank');
+
+      var btn = $$('whatsapp-btn');
+      var originalHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+
+      fetch(SERVER_URL + '/order-draft', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: cartPayload(),
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var code = data.code;
+          openWhatsApp('Hola! Quiero confirmar mi pedido PED-' + code);
+        })
+        .catch(function () {
+          // Si el servidor falla, abre WhatsApp con el JSON completo como respaldo
+          openWhatsApp('PEDIDO_WEB:' + cartPayload());
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.innerHTML = originalHTML;
+        });
     });
   }
 
