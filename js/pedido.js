@@ -1,6 +1,6 @@
 (function () {
   /* ── Constantes ──────────────────────────────────────────────── */
-  var PHONE      = '523121116210';
+  var PHONE      = '15551995612';
   var SHEETS_ID  = '16t5lMZ3-KkQgXrfP-OyTfmWKq0hTwI3Ys67eVp0vn5w';
   var GVIZ_URL   = 'https://docs.google.com/spreadsheets/d/' + SHEETS_ID +
                    '/gviz/tq?tqx=out:json&sheet=Menu';
