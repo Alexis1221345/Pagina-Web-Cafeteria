@@ -422,5 +422,5 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('sectionsLoaded', init);
 })();
