@@ -322,6 +322,20 @@
     $$('panel-total').textContent = '$' + total;
   }
 
+  /* ── Guardar pedido localmente (silencioso) ──────────────────── */
+  function guardarPedidoLocal(orderId, cartItems, total) {
+    fetch('php/guardar_pedido.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        order_id: orderId,
+        items:    cartItems,
+        total:    total,
+        fuente:   'web',
+      }),
+    }).catch(function () {});
+  }
+
   /* ── WhatsApp ────────────────────────────────────────────────── */
   var SERVER_URL = 'https://agente-ia-5cnl.onrender.com';
 
@@ -409,10 +423,13 @@
         .then(function (res) { return res.json(); })
         .then(function (data) {
           var code = data.code;
-          openWhatsApp('Hola! Quiero confirmar mi pedido PED-' + code);
+          var orderId = 'PED-' + code;
+          guardarPedidoLocal(orderId, cart, cartTotal());
+          openWhatsApp('Hola! Quiero confirmar mi pedido ' + orderId);
         })
         .catch(function () {
-          // Si el servidor falla, abre WhatsApp con el JSON completo como respaldo
+          var fallbackId = 'PED-WEB-' + Date.now();
+          guardarPedidoLocal(fallbackId, cart, cartTotal());
           openWhatsApp('PEDIDO_WEB:' + cartPayload());
         })
         .finally(function () {

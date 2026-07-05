@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haz tu Pedido — Muna Café</title>
+  <meta name="description" content="Ordena en línea desde Muna Café. Elige tus productos y envíanos tu pedido por WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/labels.css">
+  <link rel="stylesheet" href="css/pedido.css">
+
+  <style>
+    /* ── Mini-nav superior ── */
+    .page-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: var(--espresso);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .page-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .page-nav-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .page-nav-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .page-nav-back {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(245,239,228,0.55);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .page-nav-back:hover { color: var(--gold-soft); }
+
+    /* Ajuste de la sección de pedido para página independiente */
+    #pedido {
+      min-height: calc(100vh - 63px);
+      background: var(--cream-light);
+    }
+  </style>
+</head>
+<body style="background:var(--cream-light)">
+
+<!-- ── Nav ──────────────────────────────────────────── -->
+<nav class="page-nav">
+  <a href="index.html" class="page-nav-brand">
+    <img src="Imagenes/Logo.jpg" alt="Muna Café" class="page-nav-logo">
+    <span class="page-nav-name">Muna Café</span>
+  </a>
+  <a href="index.html" class="page-nav-back">← Volver al inicio</a>
+</nav>
+
+<!-- ── Contenido del pedido ─────────────────────────── -->
+<section id="pedido">
+
+  <div class="ped-section-header">
+    <div class="label label-center">Ordenar en línea</div>
+    <h1 class="ped-section-title">Haz tu Pedido</h1>
+    <p class="ped-section-desc">
+      Elige tus productos, personaliza cada detalle y envíanos tu orden por WhatsApp.
+    </p>
+  </div>
+
+  <div id="ped-menu" class="ped-page">
+    <div class="ped-loading">Cargando menú…</div>
+  </div>
+
+  <!-- Modal -->
+  <div id="ped-overlay" class="ped-overlay" role="dialog" aria-modal="true" aria-label="Personalizar producto">
+    <div class="ped-modal">
+
+      <img id="modal-img" class="ped-modal-img" src="" alt="" style="display:none">
+      <div id="modal-img-placeholder" class="ped-modal-img-placeholder">☕</div>
+
+      <div class="ped-modal-info">
+        <div id="modal-name"  class="ped-modal-name"></div>
+        <div id="modal-desc"  class="ped-modal-desc"></div>
+        <div id="modal-price" class="ped-modal-price"></div>
+      </div>
+
+      <div class="ped-qty-row">
+        <span class="ped-qty-label">Cantidad</span>
+        <div class="ped-qty-controls">
+          <button id="modal-qty-minus" class="ped-qty-btn" aria-label="Menos">−</button>
+          <span   id="modal-qty-num"   class="ped-qty-num">1</span>
+          <button id="modal-qty-plus"  class="ped-qty-btn" aria-label="Más">+</button>
+        </div>
+      </div>
+
+      <div id="modal-extras-section" class="ped-opts-section" style="display:none">
+        <div class="ped-opts-title">Agregar extras</div>
+        <div id="modal-extras-list"></div>
+      </div>
+
+      <div id="modal-sin-section" class="ped-opts-section" style="display:none">
+        <div class="ped-opts-title">Quitar ingredientes</div>
+        <div id="modal-sin-list"></div>
+      </div>
+
+      <div class="ped-note-section">
+        <label class="ped-note-label" for="modal-note">
+          Petición especial (sin cebolla, sin aguacate, etc.)
+        </label>
+        <textarea id="modal-note" class="ped-note-input" rows="2"
+          placeholder="Ej: sin cebolla, término medio, sin picante…"></textarea>
+      </div>
+
+      <div class="ped-modal-footer">
+        <button id="modal-confirm" class="ped-confirm-btn">Agregar al ticket</button>
+        <button id="modal-cancel"  class="ped-cancel-link">Cancelar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Barra de carrito -->
+  <div id="cart-bar" class="ped-cart-bar" role="button" aria-label="Ver pedido">
+    <div class="ped-cart-icon-wrap">
+      <span>🛒</span>
+      <span id="cart-count" class="ped-cart-count">0</span>
+    </div>
+    <div class="ped-cart-info">
+      <div id="cart-items-text" class="ped-cart-items-text">0 productos</div>
+      <div id="cart-total"      class="ped-cart-total">$0</div>
+    </div>
+    <span class="ped-view-btn">Ver pedido ↑</span>
+  </div>
+
+  <!-- Panel del pedido -->
+  <div id="cart-panel" class="ped-cart-panel">
+    <div class="ped-panel-header">Tu pedido</div>
+    <div id="cart-list"></div>
+    <div class="ped-panel-footer">
+      <div class="ped-panel-total">
+        <span class="ped-panel-total-label">Total estimado</span>
+        <span id="panel-total" class="ped-panel-total-amount">$0</span>
+      </div>
+      <button id="whatsapp-btn" class="ped-wa-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.554 4.107 1.523 5.831L0 24l6.338-1.499A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.359-.214-3.721.879.934-3.626-.234-.373A9.818 9.818 0 1112 21.818z"/>
+        </svg>
+        Realizar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+
+</section>
+
+<script src="js/pedido.js"></script>
+<script>
+  // La página ya tiene el HTML listo — disparar el evento que pedido.js espera
+  document.dispatchEvent(new Event('sectionsLoaded'));
+</script>
+
+</body>
+</html>

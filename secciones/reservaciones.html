@@ -1,0 +1,134 @@
+<section id="reservaciones">
+  <div class="res-wrap">
+
+    <div class="res-header">
+      <div class="label label-center reveal">Reserva tu mesa</div>
+      <h2 class="res-title reveal reveal-d1">Reservaciones</h2>
+      <p class="res-desc reveal reveal-d2">
+        Asegura tu lugar en Muna Café. Abrimos martes a domingo de 7:00 a 16:00.
+        Para grupos de más de 8 personas, contáctanos directamente.
+      </p>
+    </div>
+
+    <div class="res-form-wrap reveal reveal-d3">
+      <!-- Estado: formulario -->
+      <div id="res-form-state">
+        <form id="res-form" novalidate>
+
+          <div class="res-grid">
+
+            <div class="res-field">
+              <label class="res-label" for="res-nombre">Nombre completo</label>
+              <input
+                type="text"
+                id="res-nombre"
+                name="nombre"
+                class="res-input"
+                placeholder="Tu nombre completo"
+                required
+                autocomplete="name"
+              >
+            </div>
+
+            <div class="res-field">
+              <label class="res-label" for="res-telefono">Teléfono</label>
+              <input
+                type="tel"
+                id="res-telefono"
+                name="telefono"
+                class="res-input"
+                placeholder="+52 312 111 6210"
+                required
+                autocomplete="tel"
+              >
+            </div>
+
+            <div class="res-field">
+              <label class="res-label" for="res-fecha">Fecha</label>
+              <input
+                type="date"
+                id="res-fecha"
+                name="fecha"
+                class="res-input"
+                required
+              >
+              <span class="res-hint">Lunes cerrado</span>
+            </div>
+
+            <div class="res-field">
+              <label class="res-label" for="res-hora">Hora</label>
+              <select id="res-hora" name="hora" class="res-input res-select" required>
+                <option value="">Seleccionar horario</option>
+                <option value="07:00">7:00 am</option>
+                <option value="07:30">7:30 am</option>
+                <option value="08:00">8:00 am</option>
+                <option value="08:30">8:30 am</option>
+                <option value="09:00">9:00 am</option>
+                <option value="09:30">9:30 am</option>
+                <option value="10:00">10:00 am</option>
+                <option value="10:30">10:30 am</option>
+                <option value="11:00">11:00 am</option>
+                <option value="11:30">11:30 am</option>
+                <option value="12:00">12:00 pm</option>
+                <option value="12:30">12:30 pm</option>
+                <option value="13:00">1:00 pm</option>
+                <option value="13:30">1:30 pm</option>
+                <option value="14:00">2:00 pm</option>
+                <option value="14:30">2:30 pm</option>
+              </select>
+            </div>
+
+            <div class="res-field">
+              <label class="res-label" for="res-personas">Número de personas</label>
+              <div class="res-personas-row">
+                <button type="button" id="res-personas-menos" class="res-qty-btn" aria-label="Menos">−</button>
+                <span id="res-personas-num" class="res-qty-num">2</span>
+                <button type="button" id="res-personas-mas" class="res-qty-btn" aria-label="Más">+</button>
+              </div>
+              <input type="hidden" id="res-personas" name="personas" value="2">
+              <span class="res-hint">Máximo 8 personas</span>
+            </div>
+
+            <div class="res-field res-field-full">
+              <label class="res-label" for="res-peticiones">Peticiones especiales <span class="res-optional">(opcional)</span></label>
+              <textarea
+                id="res-peticiones"
+                name="peticiones"
+                class="res-input res-textarea"
+                rows="3"
+                placeholder="Alergias, celebraciones, preferencias de asiento, silla para bebé…"
+              ></textarea>
+            </div>
+
+          </div>
+
+          <div id="res-error" class="res-feedback res-feedback-error" style="display:none"></div>
+
+          <div class="res-submit-wrap">
+            <button type="submit" id="res-submit" class="res-submit-btn">
+              <span id="res-submit-text">Confirmar reservación</span>
+              <span class="res-submit-icon">→</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Estado: éxito -->
+      <div id="res-success-state" class="res-success" style="display:none">
+        <div class="res-success-icon">✓</div>
+        <h3 class="res-success-title">¡Reservación confirmada!</h3>
+        <p class="res-success-msg" id="res-success-msg"></p>
+        <div class="res-success-details" id="res-success-details"></div>
+        <button class="res-new-btn" id="res-new-btn">Hacer otra reservación</button>
+      </div>
+
+    </div>
+
+    <p class="res-policy reveal">
+      Cancelaciones sin costo hasta 2 horas antes de tu reserva ·
+      Grupos de más de 8 personas: <a href="#contacto" class="res-policy-link">contáctanos</a>
+    </p>
+
+  </div>
+</section>

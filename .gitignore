@@ -3,3 +3,7 @@ node_modules/
 *.zip
 skills-lock.json
 Muna Café branding/
+php/data/*.db
+php/data/*.db-wal
+php/data/*.db-shm
+php/secrets.php

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservaciones — Muna Café</title>
+  <meta name="description" content="Reserva tu mesa en Muna Café. Abrimos martes a domingo de 7:00 a 16:00.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/labels.css">
+  <link rel="stylesheet" href="css/reservaciones.css">
+
+  <style>
+    /* ── Mini-nav superior ── */
+    .page-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: rgba(36,27,18,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .page-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .page-nav-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .page-nav-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .page-nav-back {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(245,239,228,0.55);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .page-nav-back:hover { color: var(--gold-soft); }
+
+    /* Ajuste para página independiente */
+    #reservaciones {
+      min-height: calc(100vh - 63px);
+      padding-top: 80px;
+    }
+  </style>
+</head>
+<body style="background:var(--espresso)">
+
+<!-- ── Nav ──────────────────────────────────────────── -->
+<nav class="page-nav">
+  <a href="index.html" class="page-nav-brand">
+    <img src="Imagenes/Logo.jpg" alt="Muna Café" class="page-nav-logo">
+    <span class="page-nav-name">Muna Café</span>
+  </a>
+  <a href="index.html" class="page-nav-back">← Volver al inicio</a>
+</nav>
+
+<!-- ── Contenido de reservaciones ───────────────────── -->
+<section id="reservaciones">
+  <div class="res-wrap">
+
+    <div class="res-header">
+      <div class="label label-center">Reserva tu mesa</div>
+      <h1 class="res-title">Reservaciones</h1>
+      <p class="res-desc">
+        Asegura tu lugar en Muna Café. Abrimos martes a domingo de 7:00 a 16:00.
+        Para grupos de más de 8 personas, contáctanos directamente.
+      </p>
+    </div>
+
+    <div class="res-form-wrap">
+
+      <div id="res-form-state">
+        <form id="res-form" novalidate>
+
+          <div class="res-grid">
+
+            <div class="res-field">
+              <label class="res-label" for="res-nombre">Nombre completo</label>
+              <input type="text" id="res-nombre" name="nombre" class="res-input"
+                placeholder="Tu nombre completo" required autocomplete="name">
+            </div>
+
+            <div class="res-field">
+              <label class="res-label" for="res-telefono">Teléfono</label>
+              <input type="tel" id="res-telefono" name="telefono" class="res-input"
+                placeholder="+52 312 111 6210" required autocomplete="tel">
+            </div>
+
+            <div class="res-field">
+              <label class="res-label" for="res-fecha">Fecha</label>
+              <input type="date" id="res-fecha" name="fecha" class="res-input" required>
+              <span class="res-hint">Lunes cerrado</span>
+            </div>
+
+            <div class="res-field">
+              <label class="res-label" for="res-hora">Hora</label>
+              <select id="res-hora" name="hora" class="res-input res-select" required>
+                <option value="">Seleccionar horario</option>
+                <option value="07:00">7:00 am</option>
+                <option value="07:30">7:30 am</option>
+                <option value="08:00">8:00 am</option>
+                <option value="08:30">8:30 am</option>
+                <option value="09:00">9:00 am</option>
+                <option value="09:30">9:30 am</option>
+                <option value="10:00">10:00 am</option>
+                <option value="10:30">10:30 am</option>
+                <option value="11:00">11:00 am</option>
+                <option value="11:30">11:30 am</option>
+                <option value="12:00">12:00 pm</option>
+                <option value="12:30">12:30 pm</option>
+                <option value="13:00">1:00 pm</option>
+                <option value="13:30">1:30 pm</option>
+                <option value="14:00">2:00 pm</option>
+                <option value="14:30">2:30 pm</option>
+              </select>
+            </div>
+
+            <div class="res-field">
+              <label class="res-label" for="res-personas">Número de personas</label>
+              <div class="res-personas-row">
+                <button type="button" id="res-personas-menos" class="res-qty-btn" aria-label="Menos">−</button>
+                <span id="res-personas-num" class="res-qty-num">2</span>
+                <button type="button" id="res-personas-mas"   class="res-qty-btn" aria-label="Más">+</button>
+              </div>
+              <input type="hidden" id="res-personas" name="personas" value="2">
+              <span class="res-hint">Máximo 8 personas</span>
+            </div>
+
+            <div class="res-field res-field-full">
+              <label class="res-label" for="res-peticiones">
+                Peticiones especiales <span class="res-optional">(opcional)</span>
+              </label>
+              <textarea id="res-peticiones" name="peticiones" class="res-input res-textarea" rows="3"
+                placeholder="Alergias, celebraciones, preferencias de asiento, silla para bebé…"></textarea>
+            </div>
+
+          </div>
+
+          <div id="res-error" class="res-feedback res-feedback-error" style="display:none"></div>
+
+          <div class="res-submit-wrap">
+            <button type="submit" id="res-submit" class="res-submit-btn">
+              <span id="res-submit-text">Confirmar reservación</span>
+              <span class="res-submit-icon">→</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Estado éxito -->
+      <div id="res-success-state" class="res-success" style="display:none">
+        <div class="res-success-icon">✓</div>
+        <h2 class="res-success-title">¡Reservación confirmada!</h2>
+        <p class="res-success-msg" id="res-success-msg"></p>
+        <div class="res-success-details" id="res-success-details"></div>
+        <button class="res-new-btn" id="res-new-btn">Hacer otra reservación</button>
+      </div>
+
+    </div>
+
+    <p class="res-policy">
+      Cancelaciones sin costo hasta 2 horas antes de tu reserva ·
+      Grupos de más de 8 personas: <a href="index.html#contacto" class="res-policy-link">contáctanos</a>
+    </p>
+
+  </div>
+</section>
+
+<script src="js/reservaciones.js"></script>
+<script>
+  // El HTML ya está listo — disparar el evento que reservaciones.js espera
+  document.dispatchEvent(new Event('sectionsLoaded'));
+</script>
+
+</body>
+</html>

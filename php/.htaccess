@@ -1,0 +1,11 @@
+# Bloquear acceso directo a la base de datos
+<Files "*.db">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Bloquear acceso directo a config y calendar
+<FilesMatch "^(config|calendar)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
