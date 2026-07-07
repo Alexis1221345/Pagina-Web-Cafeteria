@@ -6,6 +6,73 @@
       <p class="gal-sub reveal reveal-d2">Luz, cerámica y café. Un vistazo al espacio y a los detalles que hacen a Muna.</p>
     </div>
 
+    <!-- =============================================
+         SHOWCASE CINEMATOGRÁFICO — Timed Cards (GSAP)
+         Dos recuadros: texto (izq) + imágenes (der).
+         El contorno dorado de ambos recuadros es el
+         temporizador del cambio de imagen.
+         Las tarjetas y numeración se inyectan desde
+         js/galeria-showcase.js
+    ============================================= -->
+    <div id="gal-showcase">
+
+      <!-- Recuadro de texto -->
+      <div class="gs-panel gs-panel-text" id="gs-panel-text">
+        <svg class="gs-outline" aria-hidden="true">
+          <rect class="gs-outline-rect" pathLength="100"/>
+        </svg>
+
+        <div class="gs-details" id="gs-details-even">
+          <div class="gs-place-box"><div class="gs-text">Interior</div></div>
+          <div class="gs-title-box-1"><div class="gs-title-1">La Barra</div></div>
+          <div class="gs-title-box-2"><div class="gs-title-2">Principal</div></div>
+          <div class="gs-desc">El corazón de Muna: madera clara, cerámica hecha a mano y el aroma del café recién molido recibiéndote desde la puerta.</div>
+          <div class="gs-cta">
+            <button class="gs-view-btn" onclick="gsOpenCurrent()">Ver imagen completa</button>
+          </div>
+        </div>
+
+        <div class="gs-details" id="gs-details-odd">
+          <div class="gs-place-box"><div class="gs-text">Interior</div></div>
+          <div class="gs-title-box-1"><div class="gs-title-1">La Barra</div></div>
+          <div class="gs-title-box-2"><div class="gs-title-2">Principal</div></div>
+          <div class="gs-desc">El corazón de Muna: madera clara, cerámica hecha a mano y el aroma del café recién molido recibiéndote desde la puerta.</div>
+          <div class="gs-cta">
+            <button class="gs-view-btn" onclick="gsOpenCurrent()">Ver imagen completa</button>
+          </div>
+        </div>
+
+        <div class="gs-pagination">
+          <div class="gs-arrow gs-arrow-left" onclick="gsPrev()" role="button" aria-label="Anterior">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+            </svg>
+          </div>
+          <div class="gs-arrow gs-arrow-right" onclick="gsNext()" role="button" aria-label="Siguiente">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+            </svg>
+          </div>
+          <div class="gs-progress-wrap">
+            <div class="gs-progress-bg"><div class="gs-progress-fg"></div></div>
+          </div>
+          <div class="gs-slide-numbers" id="gs-slide-numbers"></div>
+        </div>
+      </div>
+
+      <!-- Recuadro de imágenes -->
+      <div class="gs-panel gs-panel-media" id="gs-panel-media">
+        <svg class="gs-outline" aria-hidden="true">
+          <rect class="gs-outline-rect" pathLength="100"/>
+        </svg>
+        <div class="gs-stage" id="gs-stage"></div>
+        <div class="gs-cover"></div>
+      </div>
+
+    </div>
+
+    <div class="label label-center label-light reveal">La colección completa</div>
+
     <div class="gal-grid reveal">
 
       <!-- Imágenes ambientales -->

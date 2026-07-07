@@ -1,0 +1,297 @@
+/* =============================================
+   GALERÍA SHOWCASE — Timed Cards (GSAP)
+   Adaptado de "Timed Cards Opening" (dilums · CodePen)
+   Estructura de dos recuadros:
+     - Panel izquierdo: texto (siempre legible, fondo propio)
+     - Panel derecho: imágenes (más grande)
+   El temporizador de cambio dibuja el CONTORNO de
+   ambos recuadros (SVG stroke) siguiendo su lienzo.
+============================================= */
+#gal-showcase {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.8fr) 1.35fr;
+  gap: var(--element-gap);
+  height: clamp(520px, 78vh, 720px);
+  margin-bottom: var(--spacing-64);
+}
+
+/* ── Recuadros base ── */
+.gs-panel {
+  position: relative;
+  border-radius: var(--radius-cards);
+  overflow: hidden;
+}
+
+.gs-panel-text {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(244,237,224,0.08);
+}
+
+.gs-panel-media {
+  background: var(--espresso-mid);
+}
+
+/* ── Contorno temporizador (SVG sobre cada recuadro) ── */
+.gs-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 70;
+  pointer-events: none;
+}
+
+.gs-outline-rect {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+/* ── Escenario de tarjetas (panel derecho) ── */
+.gs-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.gs-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-position: center;
+  background-size: cover;
+  will-change: transform;
+}
+
+.gs-card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--cream);
+  padding-left: 14px;
+}
+
+.gs-content-start {
+  width: 26px;
+  height: 3px;
+  border-radius: var(--radius-buttons);
+  background: var(--gold);
+}
+
+.gs-content-place {
+  margin-top: 8px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.gs-content-title-1,
+.gs-content-title-2 {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.15;
+  color: #F4EDE0;
+}
+
+/* ── Detalle del slide activo (panel izquierdo) ── */
+.gs-details {
+  position: absolute;
+  top: var(--spacing-40);
+  left: var(--spacing-40);
+  right: var(--spacing-40);
+}
+
+.gs-place-box {
+  height: 44px;
+  overflow: hidden;
+}
+
+.gs-place-box .gs-text {
+  padding-top: 18px;
+  position: relative;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.gs-place-box .gs-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 3px;
+  border-radius: var(--radius-buttons);
+  background: var(--gold);
+}
+
+.gs-title-box-1,
+.gs-title-box-2 {
+  margin-top: 2px;
+  height: clamp(38px, 3.6vw, 52px);
+  overflow: hidden;
+}
+
+.gs-title-1,
+.gs-title-2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(28px, 3.1vw, 44px);
+  line-height: 1.08;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #F4EDE0;
+}
+
+.gs-desc {
+  margin-top: var(--spacing-16);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(245,239,228,0.82);
+}
+
+.gs-cta {
+  margin-top: var(--spacing-24);
+  display: flex;
+  align-items: center;
+}
+
+.gs-view-btn {
+  border: 1.5px solid rgba(201,168,118,0.55);
+  background: transparent;
+  color: #F4EDE0;
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  border-radius: var(--radius-buttons);
+  padding: 12px 26px;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.gs-view-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── Paginación (base del panel izquierdo) ── */
+.gs-pagination {
+  position: absolute;
+  left: var(--spacing-40);
+  right: var(--spacing-40);
+  bottom: var(--spacing-28);
+  display: flex;
+  align-items: center;
+  z-index: 60;
+}
+
+.gs-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-buttons);
+  border: 1.5px solid rgba(244,237,224,0.35);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.3s var(--ease);
+}
+
+.gs-arrow:hover { border-color: var(--gold); }
+
+.gs-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+  color: rgba(244,237,224,0.85);
+}
+
+.gs-arrow + .gs-arrow { margin-left: 12px; }
+
+.gs-progress-wrap {
+  margin-left: 20px;
+  height: 44px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.gs-progress-bg {
+  width: 100%;
+  height: 2px;
+  background: rgba(244,237,224,0.2);
+}
+
+.gs-progress-fg {
+  height: 2px;
+  background: var(--gold);
+}
+
+.gs-slide-numbers {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  margin-left: 14px;
+  flex-shrink: 0;
+}
+
+.gs-slide-numbers .gs-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 26px;
+  color: #F4EDE0;
+}
+
+/* ── Cover de entrada (panel derecho) ── */
+.gs-cover {
+  position: absolute;
+  inset: 0;
+  background: var(--espresso);
+  z-index: 100;
+}
+
+/* ── Responsive ── */
+@media (max-width: 880px) {
+  #gal-showcase {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .gs-panel-media {
+    order: -1;
+    height: clamp(360px, 58vh, 500px);
+  }
+
+  .gs-panel-text {
+    height: 430px;
+  }
+
+  .gs-details {
+    top: var(--spacing-28);
+    left: var(--spacing-24);
+    right: var(--spacing-24);
+  }
+
+  .gs-pagination {
+    left: var(--spacing-24);
+    right: var(--spacing-24);
+    bottom: var(--spacing-24);
+  }
+
+  .gs-desc { font-size: 13px; line-height: 1.7; }
+}
