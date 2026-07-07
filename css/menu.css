@@ -3,20 +3,18 @@
 ============================================= */
 #menu {
   background: var(--cream-light);
-  padding: 150px 72px;
+  padding: var(--section-pad-y) var(--section-pad-x);
 }
 
 .menu-wrap {
-  max-width: 1480px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }
 
 .menu-header {
   text-align: center;
-  padding-bottom: 88px;
+  padding-bottom: var(--spacing-88);
 }
-
-.menu-header .label { margin-bottom: 18px; }
 
 .menu-big-title {
   font-family: var(--serif);
@@ -68,9 +66,9 @@
 }
 
 .menu-cat-photo {
-  margin-top: 28px;
+  margin-top: var(--spacing-28);
   height: 190px;
-  border-radius: 3px;
+  border-radius: var(--radius-cards);
   overflow: hidden;
   background: var(--cream-mid);
 }
@@ -100,7 +98,7 @@
   width: 76px;
   height: 76px;
   flex-shrink: 0;
-  border-radius: 3px;
+  border-radius: var(--radius-cards);
   overflow: hidden;
   background: var(--cream-mid);
 }

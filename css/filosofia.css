@@ -2,8 +2,8 @@
    FILOSOFÍA
 ============================================= */
 #filosofia {
-  padding: 150px 72px;
-  max-width: 1480px;
+  padding: var(--section-pad-y) var(--section-pad-x);
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }
 
@@ -14,7 +14,6 @@
   align-items: center;
 }
 
-.filosofia-left .label { margin-bottom: 26px; }
 
 .filosofia-heading {
   font-family: var(--serif);
@@ -38,7 +37,7 @@
 .filosofia-img-wrap {
   position: relative;
   height: 580px;
-  border-radius: 3px;
+  border-radius: var(--radius-cards);
   overflow: hidden;
   background: var(--cream-mid);
 }

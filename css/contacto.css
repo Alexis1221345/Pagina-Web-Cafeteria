@@ -2,17 +2,15 @@
    CONTACTO
 ============================================= */
 #contacto {
-  padding: 150px 72px 100px;
-  max-width: 1480px;
+  padding: var(--section-pad-y) var(--section-pad-x) var(--spacing-88);
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }
 
 .contacto-header {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: var(--spacing-88);
 }
-
-.contacto-header .label { margin-bottom: 18px; }
 
 .contacto-title {
   font-family: var(--serif);
@@ -88,8 +86,8 @@
 /* ── Form (right column) ── */
 .form-wrap {
   background: var(--espresso);
-  border-radius: 5px;
-  padding: 56px 54px 54px;
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-56) var(--spacing-48) var(--spacing-48);
   position: relative;
   overflow: hidden;
 }
@@ -190,8 +188,8 @@ textarea.f-field {
   color: #F8F1E7 !important;
   width: 100%;
   justify-content: center;
-  border-radius: 4px;
-  margin-top: 8px;
+  border-radius: var(--radius-buttons);
+  margin-top: var(--spacing-8);
   position: relative;
 }
 
@@ -201,8 +199,8 @@ textarea.f-field {
 
 /* ── Map ── */
 .map-section {
-  padding: 0 72px 150px;
-  max-width: 1480px;
+  padding: 0 var(--section-pad-x) var(--section-pad-y);
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }
 
@@ -210,7 +208,7 @@ textarea.f-field {
   position: relative;
   height: 420px;
   background: var(--cream-mid);
-  border-radius: 4px;
+  border-radius: var(--radius-cards);
   overflow: hidden;
 }
 
@@ -230,7 +228,7 @@ textarea.f-field {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 18px 26px;
-  border-radius: 3px;
+  border-radius: var(--radius-cards);
 }
 
 .map-card p {

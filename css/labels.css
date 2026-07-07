@@ -1,15 +1,18 @@
 /* =============================================
-   SECTION LABELS
+   SECTION LABELS — Eyebrow estructural
+   Etiqueta centrada sobre el titular, tracking amplio.
+   Ritmo: label → 24px → titular
 ============================================= */
 .label {
   font-family: var(--sans);
-  font-size: 10px;
+  font-size: var(--text-caption);
   letter-spacing: 5px;
   text-transform: uppercase;
   color: var(--terracotta);
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: var(--spacing-24);
 }
 
 .label::before { content: '—'; }

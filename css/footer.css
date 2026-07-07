@@ -6,7 +6,7 @@ footer {
   color: #C5B69D;
 }
 
-.footer-wrap { max-width: 1480px; margin: 0 auto; }
+.footer-wrap { max-width: var(--page-max-width); margin: 0 auto; }
 
 /* ── Newsletter band ── */
 .footer-nl {
@@ -41,7 +41,7 @@ footer {
   min-width: 380px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(197,182,157,0.18);
-  border-radius: 100px;
+  border-radius: var(--radius-inputs);
   padding: 6px 6px 6px 22px;
   gap: 0;
   transition: border-color 0.35s var(--ease), background 0.35s var(--ease);
@@ -73,7 +73,7 @@ footer {
   text-transform: uppercase;
   color: var(--espresso);
   background: var(--terracotta);
-  border-radius: 100px;
+  border-radius: var(--radius-buttons);
   padding: 10px 22px;
   white-space: nowrap;
   transition: background 0.3s var(--ease);

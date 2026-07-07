@@ -3,7 +3,7 @@
 ============================================= */
 #manifesto {
   background: var(--espresso);
-  padding: 130px 72px;
+  padding: var(--section-pad-y) var(--section-pad-x);
   text-align: center;
   position: relative;
   overflow: hidden;

@@ -2,17 +2,15 @@
    FAVORITOS — 3 RANDOM ITEMS
 ============================================= */
 #favoritos {
-  padding: 150px 72px;
-  max-width: 1480px;
+  padding: var(--section-pad-y) var(--section-pad-x);
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }
 
 .favoritos-header {
   text-align: center;
-  margin-bottom: 84px;
+  margin-bottom: var(--spacing-88);
 }
-
-.favoritos-header .label { margin-bottom: 16px; }
 
 .favoritos-title {
   font-family: var(--serif);
@@ -27,7 +25,7 @@
   gap: 2px;
   background: var(--border);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--radius-cards);
   overflow: hidden;
 }
 
@@ -75,7 +73,7 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 5px 13px;
-  border-radius: 100px;
+  border-radius: var(--radius-buttons);
   border: 1px solid rgba(201,168,118,0.2);
   pointer-events: none;
 }

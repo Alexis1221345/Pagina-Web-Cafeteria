@@ -55,11 +55,10 @@
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(201,168,118,0.65);
-  /* doble anillo para resaltar el logo sobre el video */
+  /* doble anillo plano para resaltar el logo sobre el video */
   box-shadow:
     0 0 0 5px rgba(36,27,18,0.55),
-    0 0 0 7px rgba(201,168,118,0.22),
-    0 8px 40px rgba(0,0,0,0.65);
+    0 0 0 7px rgba(201,168,118,0.22);
   display: block;
 }
 

@@ -2,17 +2,15 @@
    NOSOTROS
 ============================================= */
 #nosotros {
-  padding: 150px 72px;
-  max-width: 1480px;
+  padding: var(--section-pad-y) var(--section-pad-x);
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }
 
 .nosotros-intro {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: var(--spacing-88);
 }
-
-.nosotros-intro .label { margin-bottom: 18px; }
 
 .nosotros-title {
   font-family: var(--serif);
@@ -28,9 +26,9 @@
 .nosotros-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-radius: 4px;
+  border-radius: var(--radius-cards);
   overflow: hidden;
-  margin-bottom: 120px;
+  margin-bottom: var(--spacing-128);
   min-height: 620px;
   border: 1px solid var(--border);
 }
@@ -95,7 +93,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--radius-cards);
   overflow: hidden;
 }
 

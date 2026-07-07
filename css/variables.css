@@ -26,6 +26,61 @@
   --sans:  'Jost', system-ui, sans-serif;
   --ease:  cubic-bezier(0.32, 0.72, 0, 1);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* =============================================
+     ESTRUCTURA — Escala de espaciado (base 4px)
+  ============================================= */
+  --spacing-4:   4px;
+  --spacing-8:   8px;
+  --spacing-12:  12px;
+  --spacing-16:  16px;
+  --spacing-20:  20px;
+  --spacing-24:  24px;
+  --spacing-28:  28px;
+  --spacing-32:  32px;
+  --spacing-40:  40px;
+  --spacing-48:  48px;
+  --spacing-56:  56px;
+  --spacing-64:  64px;
+  --spacing-88:  88px;
+  --spacing-128: 128px;
+  --spacing-144: 144px;
+
+  /* =============================================
+     ESTRUCTURA — Sistema de dos radios
+     14px para tarjetas · 9999px para pills/inputs
+  ============================================= */
+  --radius-cards:   14px;
+  --radius-inputs:  9999px;
+  --radius-buttons: 9999px;
+
+  /* =============================================
+     ESTRUCTURA — Layout
+  ============================================= */
+  --page-max-width: 1200px;
+  --section-pad-y:  var(--spacing-128);
+  --section-pad-x:  var(--spacing-64);
+  --section-gap:    80px;
+  --card-padding:   var(--spacing-24);
+  --element-gap:    var(--spacing-20);
+
+  /* =============================================
+     ESTRUCTURA — Escala tipográfica
+  ============================================= */
+  --text-caption:        10px;
+  --leading-caption:     1.2;
+  --text-body:           16px;
+  --leading-body:        1.35;
+  --text-subheading:     20px;
+  --leading-subheading:  1.25;
+  --text-heading-sm:     24px;
+  --leading-heading-sm:  1.2;
+  --tracking-heading-sm: 2.4px;
+  --text-heading:        36px;
+  --leading-heading:     1.1;
+  --tracking-heading:    3.6px;
+  --text-display:        clamp(40px, 5vw, 64px);
+  --leading-display:     1.1;
 }
 
 html {

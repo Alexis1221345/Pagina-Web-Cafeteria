@@ -3,7 +3,7 @@
 ============================================= */
 #reservaciones {
   background: var(--espresso);
-  padding: 150px 72px;
+  padding: var(--section-pad-y) var(--section-pad-x);
 }
 
 .res-wrap {
@@ -45,7 +45,7 @@
 .res-form-wrap {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 16px;
+  border-radius: var(--radius-cards);
   padding: 56px;
   backdrop-filter: blur(4px);
 }
@@ -88,7 +88,7 @@
   padding: 14px 18px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
+  border-radius: var(--radius-cards);
   color: var(--cream);
   outline: none;
   width: 100%;
@@ -132,7 +132,7 @@
   gap: 0;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
+  border-radius: var(--radius-cards);
   overflow: hidden;
   height: 50px;
 }
@@ -166,7 +166,7 @@
 /* ── Feedback ── */
 .res-feedback {
   padding: 14px 18px;
-  border-radius: 8px;
+  border-radius: var(--radius-cards);
   font-size: 14px;
   font-weight: 300;
   margin-bottom: 24px;
@@ -193,17 +193,14 @@
   letter-spacing: 3px;
   text-transform: uppercase;
   border: none;
-  border-radius: 100px;
-  padding: 16px 10px 16px 30px;
+  border-radius: var(--radius-buttons);
+  padding: 16px 10px 16px 32px;
   cursor: pointer;
-  transition: background 0.35s var(--ease), transform 0.3s var(--ease), box-shadow 0.35s var(--ease);
-  box-shadow: 0 10px 32px rgba(201,168,118,0.3);
+  transition: background 0.35s var(--ease);
 }
 
 .res-submit-btn:hover {
   background: #d4b27e;
-  transform: translateY(-2px);
-  box-shadow: 0 18px 44px rgba(201,168,118,0.38);
 }
 
 .res-submit-btn:active { transform: scale(0.975); }
@@ -270,7 +267,7 @@
 .res-success-details {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px;
+  border-radius: var(--radius-cards);
   padding: 24px 32px;
   display: inline-block;
   text-align: left;
@@ -298,7 +295,7 @@
   text-transform: uppercase;
   color: var(--gold-soft);
   border: 1px solid rgba(216,199,172,0.3);
-  border-radius: 100px;
+  border-radius: var(--radius-buttons);
   padding: 12px 24px;
   cursor: pointer;
   background: transparent;
