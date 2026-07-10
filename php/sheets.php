@@ -29,6 +29,9 @@ function sheetsApiRequest(string $method, string $url, ?array $body, string $tok
     if ($method === 'POST') {
         $opts[CURLOPT_POST]       = true;
         $opts[CURLOPT_POSTFIELDS] = json_encode($body, JSON_UNESCAPED_UNICODE);
+    } elseif ($method === 'PUT') {
+        $opts[CURLOPT_CUSTOMREQUEST] = 'PUT';
+        $opts[CURLOPT_POSTFIELDS]    = json_encode($body, JSON_UNESCAPED_UNICODE);
     }
     curl_setopt_array($ch, $opts);
     $resp = curl_exec($ch);
@@ -47,6 +50,19 @@ function getMenuRows(string $token): ?array {
         return null;
     }
     return $data['values'] ?? [];
+}
+
+/** Actualiza las columnas D–J (producto) de una fila existente del menú. */
+function updateMenuRow(int $rowNum, array $values, string $token): bool {
+    $range = rawurlencode(MENU_SHEET_NAME . "!D{$rowNum}:J{$rowNum}");
+    $url   = 'https://sheets.googleapis.com/v4/spreadsheets/' . MENU_SHEETS_ID .
+             '/values/' . $range . '?valueInputOption=USER_ENTERED';
+    [$code, $data] = sheetsApiRequest('PUT', $url, ['values' => [$values]], $token);
+    if ($code !== 200) {
+        error_log('[sheets.php] updateMenuRow HTTP ' . $code . ': ' . json_encode($data));
+        return false;
+    }
+    return true;
 }
 
 /** Agrega una fila al final del menú. $row = array de 10 valores (A–J). */

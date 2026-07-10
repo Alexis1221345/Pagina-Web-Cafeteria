@@ -28,7 +28,7 @@ try {
     $productos  = [];
     $catIndex   = [];
 
-    foreach ($rows as $r) {
+    foreach ($rows as $i => $r) {
         $catNum  = trim($r[0] ?? '');
         $catName = trim($r[1] ?? '');
         $catFoto = trim($r[2] ?? '');
@@ -42,6 +42,7 @@ try {
         }
 
         $productos[] = [
+            'fila'          => $i + 2, // número de fila real en el sheet (encabezado = fila 1)
             'categoria_num' => $catNum,
             'categoria'     => $catName,
             'nombre'        => $nombre,

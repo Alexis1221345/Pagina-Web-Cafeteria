@@ -63,7 +63,7 @@ http://localhost:8080/gerencia/
 |---------|-------------|
 | 📅 Reservaciones | Lista de reservaciones (web + WhatsApp). Filtros por fecha y estado. |
 | 🧾 Pedidos | Lista de pedidos con cambio de estado en vivo y ticket de impresión. |
-| 🍽️ Menú | Solo gerentes. Agregar productos al menú (categoría existente o nueva); se escriben directo en el Google Sheet del menú. |
+| 🍽️ Menú | Solo gerentes. Agregar y editar productos del menú (precio, descripción, disponibilidad…); los cambios se escriben directo en el Google Sheet del menú. |
 | 👥 Usuarios | Solo gerentes. Crear meseros, activar o desactivar acceso. |
 
 ### Roles

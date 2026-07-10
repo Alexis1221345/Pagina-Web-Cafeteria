@@ -248,10 +248,11 @@ $rol    = htmlspecialchars($_SESSION['rol']);
               <th>Disponible</th>
               <th>Extras</th>
               <th>Sin</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody id="tbody-menu">
-            <tr><td colspan="7" class="dash-loading">Cargando...</td></tr>
+            <tr><td colspan="8" class="dash-loading">Cargando...</td></tr>
           </tbody>
         </table>
       </div>
@@ -675,7 +676,7 @@ var menuProductos  = [];
 function loadMenu() {
   var tbody = document.getElementById('tbody-menu');
   if (!tbody) return;
-  tbody.innerHTML = '<tr><td colspan="7" class="dash-loading">Cargando...</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="8" class="dash-loading">Cargando...</td></tr>';
   fetch('api/get_menu.php')
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -686,7 +687,7 @@ function loadMenu() {
       renderMenuTable();
     })
     .catch(function(err) {
-      tbody.innerHTML = '<tr><td colspan="7" class="dash-error">' +
+      tbody.innerHTML = '<tr><td colspan="8" class="dash-error">' +
         esc(err.message || 'Error al cargar el menú') + '</td></tr>';
     });
 }
@@ -715,7 +716,7 @@ function renderMenuTable() {
   var tbody = document.getElementById('tbody-menu');
   if (!tbody) return;
   if (!menuProductos.length) {
-    tbody.innerHTML = '<tr><td colspan="7" class="dash-empty">No hay productos en el menú</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" class="dash-empty">No hay productos en el menú</td></tr>';
     return;
   }
   tbody.innerHTML = menuProductos.map(function(p) {
@@ -730,21 +731,61 @@ function renderMenuTable() {
       '<td>' + disp + '</td>' +
       '<td class="text-sm">' + esc(p.extras || '—') + '</td>' +
       '<td class="text-sm">' + esc(p.sin_opciones || '—') + '</td>' +
+      '<td><button class="dash-btn-ticket" onclick="editarProducto(' + p.fila + ')">✏️ Editar</button></td>' +
     '</tr>';
   }).join('');
 }
+
+var productoEnEdicion = null; // {fila, nombre} — null = modo "agregar"
 
 function toggleFormProducto() {
   var wrap = document.getElementById('form-producto-wrap');
   if (!wrap) return;
   var visible = wrap.style.display !== 'none';
   wrap.style.display = visible ? 'none' : '';
-  if (!visible) {
-    document.getElementById('form-producto').reset();
-    document.getElementById('prod-error').style.display = 'none';
-    document.getElementById('prod-ok').style.display    = 'none';
-    toggleNuevaCategoria();
+  if (!visible) resetFormProducto();
+}
+
+function resetFormProducto() {
+  productoEnEdicion = null;
+  var form = document.getElementById('form-producto');
+  form.reset();
+  var sel = document.getElementById('prod-categoria');
+  sel.disabled = false;
+  document.getElementById('prod-error').style.display = 'none';
+  document.getElementById('prod-ok').style.display    = 'none';
+  document.getElementById('prod-submit').textContent  = 'Agregar al menú';
+  toggleNuevaCategoria();
+}
+
+function editarProducto(fila) {
+  var p = null;
+  for (var i = 0; i < menuProductos.length; i++) {
+    if (menuProductos[i].fila === fila) { p = menuProductos[i]; break; }
   }
+  if (!p) return;
+
+  var wrap = document.getElementById('form-producto-wrap');
+  wrap.style.display = '';
+  resetFormProducto();
+
+  productoEnEdicion = { fila: p.fila, nombre: p.nombre };
+
+  var sel = document.getElementById('prod-categoria');
+  sel.value    = p.categoria_num;
+  sel.disabled = true; // la categoría no se cambia al editar
+  document.getElementById('prod-nueva-cat').style.display = 'none';
+
+  document.getElementById('prod-nombre').value      = p.nombre;
+  document.getElementById('prod-precio').value      = p.precio;
+  document.getElementById('prod-descripcion').value = p.descripcion;
+  document.getElementById('prod-imagen').value      = p.imagen;
+  document.getElementById('prod-extras').value      = p.extras;
+  document.getElementById('prod-sin').value         = p.sin_opciones;
+  document.getElementById('prod-disponible').checked = p.disponible;
+  document.getElementById('prod-submit').textContent = 'Guardar cambios';
+
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -777,16 +818,25 @@ document.addEventListener('DOMContentLoaded', function() {
       disponible:     document.getElementById('prod-disponible').checked,
     };
 
-    if (payload.categoria_modo === 'nueva' && (!payload.cat_nombre || !payload.cat_etiqueta)) {
+    var editando = !!productoEnEdicion;
+
+    if (!editando && payload.categoria_modo === 'nueva' && (!payload.cat_nombre || !payload.cat_etiqueta)) {
       errEl.textContent   = 'Para una categoría nueva escribe su nombre y su etiqueta corta.';
       errEl.style.display = '';
       return;
     }
 
+    var url = 'api/crear_producto.php';
+    if (editando) {
+      url = 'api/actualizar_producto.php';
+      payload.fila            = productoEnEdicion.fila;
+      payload.nombre_original = productoEnEdicion.nombre;
+    }
+
     btn.disabled    = true;
     btn.textContent = 'Guardando…';
 
-    fetch('api/crear_producto.php', {
+    fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
@@ -794,13 +844,16 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(function(r) { return r.json(); })
     .then(function(data) {
       if (data.ok) {
-        okEl.textContent = '"' + data.producto + '" agregado a ' + data.categoria.num +
-          ' — ' + data.categoria.nombre + '. Puede tardar 1–2 minutos en verse en la página.';
+        var msg = editando
+          ? '"' + data.producto + '" actualizado. Puede tardar 1–2 minutos en verse en la página.'
+          : '"' + data.producto + '" agregado a ' + data.categoria.num +
+            ' — ' + data.categoria.nombre + '. Puede tardar 1–2 minutos en verse en la página.';
+        resetFormProducto();
+        okEl.textContent   = msg;
         okEl.style.display = '';
-        form.reset();
         loadMenu();
       } else {
-        errEl.textContent   = data.error || 'Error al agregar el producto';
+        errEl.textContent   = data.error || 'Error al guardar el producto';
         errEl.style.display = '';
       }
     })
@@ -810,7 +863,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .finally(function() {
       btn.disabled    = false;
-      btn.textContent = 'Agregar al menú';
+      btn.textContent = productoEnEdicion ? 'Guardar cambios' : 'Agregar al menú';
     });
   });
 });
