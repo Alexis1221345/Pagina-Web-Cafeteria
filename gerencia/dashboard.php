@@ -37,6 +37,9 @@ $rol    = htmlspecialchars($_SESSION['rol']);
         <span class="dash-nav-icon">🧾</span> Pedidos
       </button>
       <?php if ($_SESSION['rol'] === 'gerente'): ?>
+      <button class="dash-nav-item" data-section="menu">
+        <span class="dash-nav-icon">🍽️</span> Menú
+      </button>
       <button class="dash-nav-item" data-section="usuarios">
         <span class="dash-nav-icon">👥</span> Usuarios
       </button>
@@ -148,6 +151,113 @@ $rol    = htmlspecialchars($_SESSION['rol']);
       </div>
     </section>
 
+    <!-- ── Sección Menú (solo gerente) ── -->
+    <?php if ($_SESSION['rol'] === 'gerente'): ?>
+    <section class="dash-section" id="section-menu" style="display:none">
+      <div class="dash-section-header">
+        <h2>Menú — Productos</h2>
+        <button class="dash-btn-refresh" onclick="toggleFormProducto()">+ Nuevo producto</button>
+      </div>
+
+      <!-- Formulario agregar producto -->
+      <div id="form-producto-wrap" class="usr-form-wrap" style="display:none">
+        <form id="form-producto" class="usr-form">
+
+          <div class="usr-form-grid">
+            <div class="usr-field">
+              <label class="usr-label">Categoría</label>
+              <select id="prod-categoria" class="usr-input">
+                <option value="">Cargando categorías…</option>
+              </select>
+              <span class="usr-help">Elige una existente o crea una nueva.</span>
+            </div>
+            <div class="usr-field">
+              <label class="usr-label">Nombre del producto *</label>
+              <input type="text" id="prod-nombre" class="usr-input" placeholder="Ej. Latte de Vainilla" maxlength="120" required>
+            </div>
+            <div class="usr-field">
+              <label class="usr-label">Precio (MXN) *</label>
+              <input type="number" id="prod-precio" class="usr-input" placeholder="Ej. 62" min="0" step="0.5" required>
+            </div>
+          </div>
+
+          <!-- Campos de categoría nueva (ocultos hasta elegir "Nueva categoría") -->
+          <div id="prod-nueva-cat" class="usr-form-grid" style="display:none">
+            <div class="usr-field">
+              <label class="usr-label">Nombre de la nueva categoría *</label>
+              <input type="text" id="prod-cat-nombre" class="usr-input" placeholder="Ej. Bebidas de Temporada" maxlength="60">
+            </div>
+            <div class="usr-field">
+              <label class="usr-label">Etiqueta corta *</label>
+              <input type="text" id="prod-cat-etiqueta" class="usr-input" placeholder="Ej. Temporada" maxlength="20">
+              <span class="usr-help">Aparece junto al número: "05 / Temporada". El número se asigna solo.</span>
+            </div>
+            <div class="usr-field">
+              <label class="usr-label">Foto de la categoría (opcional)</label>
+              <input type="text" id="prod-cat-foto" class="usr-input" placeholder="Archivo en Imagenes/ o URL" maxlength="300">
+            </div>
+          </div>
+
+          <div class="usr-form-grid">
+            <div class="usr-field">
+              <label class="usr-label">Descripción</label>
+              <input type="text" id="prod-descripcion" class="usr-input" placeholder="Ej. Leche sedosa, vainilla natural" maxlength="200">
+            </div>
+            <div class="usr-field">
+              <label class="usr-label">Imagen del producto (opcional)</label>
+              <input type="text" id="prod-imagen" class="usr-input" placeholder="Archivo en Imagenes/, URL o link de Drive" maxlength="300">
+              <span class="usr-help">Ej. "Latte Caliente.jpeg" (ya subido a Imagenes/) o un link de Google Drive.</span>
+            </div>
+            <div class="usr-field">
+              <label class="usr-label">Disponible</label>
+              <label class="usr-check"><input type="checkbox" id="prod-disponible" checked> Mostrar en la página</label>
+            </div>
+          </div>
+
+          <div class="usr-form-grid">
+            <div class="usr-field">
+              <label class="usr-label">Extras (opcional)</label>
+              <input type="text" id="prod-extras" class="usr-input" placeholder="Ej. leche de avena, shot extra" maxlength="200">
+              <span class="usr-help">Separados por comas. El cliente puede agregarlos a su pedido.</span>
+            </div>
+            <div class="usr-field">
+              <label class="usr-label">Se puede pedir sin… (opcional)</label>
+              <input type="text" id="prod-sin" class="usr-input" placeholder="Ej. nuez, crema" maxlength="200">
+              <span class="usr-help">Ingredientes que el cliente puede quitar, separados por comas.</span>
+            </div>
+          </div>
+
+          <div id="prod-error" class="usr-feedback usr-error" style="display:none"></div>
+          <div id="prod-ok"    class="usr-feedback usr-ok"    style="display:none"></div>
+          <div class="usr-form-actions">
+            <button type="submit" class="dash-btn-primary" id="prod-submit">Agregar al menú</button>
+            <button type="button" class="dash-btn-secondary" onclick="toggleFormProducto()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tabla del menú actual -->
+      <div class="dash-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Descripción</th>
+              <th>Disponible</th>
+              <th>Extras</th>
+              <th>Sin</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-menu">
+            <tr><td colspan="7" class="dash-loading">Cargando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <?php endif; ?>
+
     <!-- ── Sección Usuarios (solo gerente) ── -->
     <?php if ($_SESSION['rol'] === 'gerente'): ?>
     <section class="dash-section" id="section-usuarios" style="display:none">
@@ -234,9 +344,12 @@ document.querySelectorAll('.dash-nav-item').forEach(function(btn) {
     document.getElementById('section-pedidos').style.display       = sec === 'pedidos'       ? '' : 'none';
     var secUsr = document.getElementById('section-usuarios');
     if (secUsr) secUsr.style.display = sec === 'usuarios' ? '' : 'none';
+    var secMenu = document.getElementById('section-menu');
+    if (secMenu) secMenu.style.display = sec === 'menu' ? '' : 'none';
     if (sec === 'reservaciones') loadReservaciones();
     else if (sec === 'pedidos')  loadPedidos();
     else if (sec === 'usuarios') loadUsuarios();
+    else if (sec === 'menu')     loadMenu();
   });
 });
 
@@ -551,6 +664,153 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function() {
       errEl.textContent   = 'Error de conexión';
       errEl.style.display = '';
+    });
+  });
+});
+
+// ── Menú (Google Sheets) ─────────────────────────────────────────
+var menuCategorias = [];
+var menuProductos  = [];
+
+function loadMenu() {
+  var tbody = document.getElementById('tbody-menu');
+  if (!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="7" class="dash-loading">Cargando...</td></tr>';
+  fetch('api/get_menu.php')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.error) throw new Error(data.error);
+      menuCategorias = data.categorias || [];
+      menuProductos  = data.productos  || [];
+      fillCategoriaSelect();
+      renderMenuTable();
+    })
+    .catch(function(err) {
+      tbody.innerHTML = '<tr><td colspan="7" class="dash-error">' +
+        esc(err.message || 'Error al cargar el menú') + '</td></tr>';
+    });
+}
+
+function fillCategoriaSelect() {
+  var sel = document.getElementById('prod-categoria');
+  if (!sel) return;
+  var current = sel.value;
+  sel.innerHTML =
+    menuCategorias.map(function(c) {
+      return '<option value="' + esc(c.num) + '">' + esc(c.num + ' — ' + c.nombre) + '</option>';
+    }).join('') +
+    '<option value="__nueva__">➕ Nueva categoría…</option>';
+  if (current) sel.value = current;
+  toggleNuevaCategoria();
+}
+
+function toggleNuevaCategoria() {
+  var sel  = document.getElementById('prod-categoria');
+  var wrap = document.getElementById('prod-nueva-cat');
+  if (!sel || !wrap) return;
+  wrap.style.display = sel.value === '__nueva__' ? '' : 'none';
+}
+
+function renderMenuTable() {
+  var tbody = document.getElementById('tbody-menu');
+  if (!tbody) return;
+  if (!menuProductos.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="dash-empty">No hay productos en el menú</td></tr>';
+    return;
+  }
+  tbody.innerHTML = menuProductos.map(function(p) {
+    var disp = p.disponible
+      ? '<span class="badge badge-ok">Sí</span>'
+      : '<span class="badge badge-cancel">No</span>';
+    return '<tr>' +
+      '<td class="text-sm">' + esc(p.categoria_num ? p.categoria_num + ' — ' + p.categoria : p.categoria) + '</td>' +
+      '<td>' + esc(p.nombre) + '</td>' +
+      '<td class="bold">$' + esc(p.precio) + '</td>' +
+      '<td class="text-sm">' + esc(p.descripcion || '—') + '</td>' +
+      '<td>' + disp + '</td>' +
+      '<td class="text-sm">' + esc(p.extras || '—') + '</td>' +
+      '<td class="text-sm">' + esc(p.sin_opciones || '—') + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function toggleFormProducto() {
+  var wrap = document.getElementById('form-producto-wrap');
+  if (!wrap) return;
+  var visible = wrap.style.display !== 'none';
+  wrap.style.display = visible ? 'none' : '';
+  if (!visible) {
+    document.getElementById('form-producto').reset();
+    document.getElementById('prod-error').style.display = 'none';
+    document.getElementById('prod-ok').style.display    = 'none';
+    toggleNuevaCategoria();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var sel = document.getElementById('prod-categoria');
+  if (sel) sel.addEventListener('change', toggleNuevaCategoria);
+
+  var form = document.getElementById('form-producto');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var errEl = document.getElementById('prod-error');
+    var okEl  = document.getElementById('prod-ok');
+    var btn   = document.getElementById('prod-submit');
+    errEl.style.display = 'none';
+    okEl.style.display  = 'none';
+
+    var catValue = document.getElementById('prod-categoria').value;
+    var payload = {
+      categoria_modo: catValue === '__nueva__' ? 'nueva' : 'existente',
+      categoria_num:  catValue === '__nueva__' ? '' : catValue,
+      cat_nombre:     document.getElementById('prod-cat-nombre').value.trim(),
+      cat_etiqueta:   document.getElementById('prod-cat-etiqueta').value.trim(),
+      cat_foto:       document.getElementById('prod-cat-foto').value.trim(),
+      nombre:         document.getElementById('prod-nombre').value.trim(),
+      precio:         document.getElementById('prod-precio').value,
+      descripcion:    document.getElementById('prod-descripcion').value.trim(),
+      imagen:         document.getElementById('prod-imagen').value.trim(),
+      extras:         document.getElementById('prod-extras').value.trim(),
+      sin_opciones:   document.getElementById('prod-sin').value.trim(),
+      disponible:     document.getElementById('prod-disponible').checked,
+    };
+
+    if (payload.categoria_modo === 'nueva' && (!payload.cat_nombre || !payload.cat_etiqueta)) {
+      errEl.textContent   = 'Para una categoría nueva escribe su nombre y su etiqueta corta.';
+      errEl.style.display = '';
+      return;
+    }
+
+    btn.disabled    = true;
+    btn.textContent = 'Guardando…';
+
+    fetch('api/crear_producto.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        okEl.textContent = '"' + data.producto + '" agregado a ' + data.categoria.num +
+          ' — ' + data.categoria.nombre + '. Puede tardar 1–2 minutos en verse en la página.';
+        okEl.style.display = '';
+        form.reset();
+        loadMenu();
+      } else {
+        errEl.textContent   = data.error || 'Error al agregar el producto';
+        errEl.style.display = '';
+      }
+    })
+    .catch(function() {
+      errEl.textContent   = 'Error de conexión';
+      errEl.style.display = '';
+    })
+    .finally(function() {
+      btn.disabled    = false;
+      btn.textContent = 'Agregar al menú';
     });
   });
 });

@@ -9,8 +9,8 @@
     </IfModule>
 </Files>
 
-# Bloquear acceso directo a config, calendar y secretos
-<FilesMatch "^(config|calendar|secrets)\.php$|^secrets\.php\.example$">
+# Bloquear acceso directo a config, calendar, sheets y secretos
+<FilesMatch "^(config|calendar|sheets|secrets)\.php$|^secrets\.php\.example$">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>

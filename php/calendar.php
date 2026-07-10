@@ -5,12 +5,12 @@ function base64url(string $data): string {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
 
-function getGoogleAccessToken(): ?string {
+function getGoogleAccessToken(string $scope = 'https://www.googleapis.com/auth/calendar'): ?string {
     $now    = time();
     $header  = base64url(json_encode(['alg' => 'RS256', 'typ' => 'JWT']));
     $payload = base64url(json_encode([
         'iss'   => SERVICE_ACCOUNT_EMAIL,
-        'scope' => 'https://www.googleapis.com/auth/calendar',
+        'scope' => $scope,
         'aud'   => 'https://oauth2.googleapis.com/token',
         'iat'   => $now,
         'exp'   => $now + 3600,
@@ -36,7 +36,6 @@ function getGoogleAccessToken(): ?string {
     ]);
 
     $resp = curl_exec($ch);
-    curl_close($ch);
 
     $data = json_decode($resp, true);
     return $data['access_token'] ?? null;
@@ -63,7 +62,6 @@ function checkSlotAvailability(string $token, string $fecha, string $hora, int $
         CURLOPT_TIMEOUT        => 15,
     ]);
     $resp = curl_exec($ch);
-    curl_close($ch);
 
     $data   = json_decode($resp, true);
     $events = $data['items'] ?? [];
@@ -130,7 +128,6 @@ function createCalendarEvent(string $token, array $p): ?string {
     ]);
     $resp     = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
 
     if ($httpCode !== 200) return null;
 

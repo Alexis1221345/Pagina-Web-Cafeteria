@@ -349,6 +349,32 @@ button { border: none; background: none; cursor: pointer; font-family: var(--san
 .usr-error { background: #fdecea; color: var(--red); }
 .usr-ok    { background: #e8f5ee; color: var(--green); }
 
+/* ── Formulario de menú ──────────────────────────────────────────── */
+.usr-help {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+.usr-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.usr-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--terracotta);
+  cursor: pointer;
+}
+
+select.usr-input { cursor: pointer; }
+
 /* ── Badges ──────────────────────────────────────────────────────── */
 .badge {
   display: inline-block;

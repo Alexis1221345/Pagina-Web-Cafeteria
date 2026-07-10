@@ -63,14 +63,22 @@ http://localhost:8080/gerencia/
 |---------|-------------|
 | 📅 Reservaciones | Lista de reservaciones (web + WhatsApp). Filtros por fecha y estado. |
 | 🧾 Pedidos | Lista de pedidos con cambio de estado en vivo y ticket de impresión. |
+| 🍽️ Menú | Solo gerentes. Agregar productos al menú (categoría existente o nueva); se escriben directo en el Google Sheet del menú. |
 | 👥 Usuarios | Solo gerentes. Crear meseros, activar o desactivar acceso. |
 
 ### Roles
 
 | Rol | Puede ver |
 |-----|-----------|
-| Gerente | Reservaciones, Pedidos, Usuarios |
+| Gerente | Reservaciones, Pedidos, Menú, Usuarios |
 | Mesero  | Reservaciones, Pedidos |
+
+### Menú en Google Sheets
+
+El menú de la página se lee del sheet `Menu` (ID en `js/menu.js` y `php/sheets.php`).
+La sección **Menú** de gerencia escribe en ese mismo sheet usando la cuenta de servicio,
+por lo que el spreadsheet debe estar **compartido como Editor** con `SERVICE_ACCOUNT_EMAIL`
+(ya configurado). Los productos agregados aparecen en la página en 1–2 minutos.
 
 ---
 
